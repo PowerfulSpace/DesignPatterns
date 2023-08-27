@@ -4,5 +4,6 @@
     {
         public abstract AbstractBottle CreateBottle();
         public abstract AbstractWater CreateWater();
+        public abstract AbstractCover CreateCover();
     }
 }

@@ -8,5 +8,9 @@ namespace Pattern_AbstractFactory.Models.PepsiModel
         {
             Console.WriteLine(this + " interact with " + water);
         }
+        public override void ScrewTheCork(AbstractCover cover)
+        {
+            Console.WriteLine(this + " Cover installed " + cover);
+        }
     }
 }

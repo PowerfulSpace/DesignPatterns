@@ -8,6 +8,12 @@ namespace Pattern_AbstractFactory.Models.CocaColaModel
         {
             return new CocaColaBottle();
         }
+
+        public override AbstractCover CreateCover()
+        {
+            return new CocaColaCover();
+        }
+
         public override AbstractWater CreateWater()
         {
             return new CocaColaWater();
