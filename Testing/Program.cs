@@ -1,86 +1,85 @@
 ﻿
+using System.Collections;
 
-Client client;
-
-client = new Client(new CocaColaFactory());
-client.Run();
-
-client = new Client(new PepsiFactory());
-client.Run();
+Builder builder = new ConcreteBuilder();
+Foreman foreman = new Foreman(builder);
+foreman.Construct();
+House result = builder.GetResult();
 
 Console.ReadLine();
-
-class Client
+class Foreman
 {
-    private AbstractWater abstractWater;
-    private AbstractBottle abstractBottle;
-    public Client(AbstractFactory factory)
+    Builder builder;
+    public Foreman(Builder builder)
     {
-        abstractWater = factory.CreateWater();
-        abstractBottle = factory.CreateBottle();
+        this.builder = builder;
     }
-    public void Run()
+    public void Construct()
     {
-        abstractBottle.Interact(abstractWater);
-    }
-}
-
-abstract class AbstractFactory
-{
-    public abstract AbstractBottle CreateBottle();
-    public abstract AbstractWater CreateWater();
-}
-
-class CocaColaFactory : AbstractFactory
-{
-    public override AbstractBottle CreateBottle()
-    {
-        return new CocaColaBottle();
-    }
-    public override AbstractWater CreateWater()
-    {
-        return new CocaColaWater();
+        builder.CreateBasement();
+        builder.CreateStorey();
+        builder.CreateRoof();
     }
 }
-class PepsiFactory : AbstractFactory
+abstract class Builder
 {
-    public override AbstractBottle CreateBottle()
+    public abstract void CreateBasement();
+    public abstract void CreateStorey();
+    public abstract void CreateRoof();
+    public abstract House GetResult();
+
+}
+class ConcreteBuilder : Builder 
+{
+    public House house = new House();
+    public override void CreateBasement()
     {
-        return new PepsiBottle();
+        house.Add(new Basement());
     }
-    public override AbstractWater CreateWater()
+    public override void CreateStorey()
     {
-        return new PepsiWater();
+        house.Add(new Storey());
     }
-}
-abstract class AbstractWater
-{
-
-}
-abstract class AbstractBottle
-{
-    public abstract void Interact(AbstractWater water);
-}
-
-class CocaColaWater : AbstractWater
-{
-
-}
-class PepsiWater : AbstractWater
-{
-
-}
-class CocaColaBottle : AbstractBottle
-{
-    public override void Interact(AbstractWater water)
+    public override void CreateRoof()
     {
-        Console.WriteLine(this + " interact with " + water);
+        house.Add(new Roof());
+    }
+    public override House GetResult()
+    {
+        return house;
     }
 }
-class PepsiBottle : AbstractBottle
+
+class House
 {
-    public override void Interact(AbstractWater water)
+    private ArrayList house;
+    public House()
     {
-        Console.WriteLine(this + " interact with " + water);
+        house = new ArrayList();
+    }
+    public void Add(object obj)
+    {
+        house.Add(obj);
+    }
+}
+class Basement
+{
+    public Basement()
+    {
+        Console.WriteLine("Подвал построен");
+    } 
+}
+class Storey
+{
+    public Storey()
+    {
+        Console.WriteLine("Этаж построен");
+    }
+}
+class Roof
+{
+    public Roof()
+    {
+        Console.WriteLine("Крыша построена");
     }
 }
