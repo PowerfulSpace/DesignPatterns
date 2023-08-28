@@ -1,5 +1,4 @@
 ﻿using Pattern_AbstractFactory.Abstracts;
-using Pattern_AbstractFactory.Models.CocaColaModel;
 
 namespace Pattern_AbstractFactory.Models.PepsiModel
 {
@@ -16,6 +15,14 @@ namespace Pattern_AbstractFactory.Models.PepsiModel
         public override AbstractWater CreateWater()
         {
             return new PepsiWater();
+        }
+        public override AbstractSticker CreateSticker()
+        {
+            return new PepsiSticker();
+        }
+        public override string ToString()
+        {
+            return "PepsiFactory";
         }
     }
 }

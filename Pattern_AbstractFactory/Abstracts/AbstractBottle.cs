@@ -4,5 +4,6 @@
     {
         public abstract void Interact(AbstractWater water);
         public abstract void ScrewTheCork(AbstractCover cover);
+        public abstract void StickASticker(AbstractSticker  sticker);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Pattern_AbstractFactory.Models.PepsiModel
 {
-    class PepsiWater : AbstractWater
+    class PepsiSticker : AbstractSticker
     {
         public override string ToString()
         {
-            return "PepsiWater";
+            return "PepsiSticker";
         }
     }
 }

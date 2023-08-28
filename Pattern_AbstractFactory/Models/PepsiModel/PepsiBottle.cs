@@ -12,5 +12,14 @@ namespace Pattern_AbstractFactory.Models.PepsiModel
         {
             Console.WriteLine(this + " Cover installed " + cover);
         }
+
+        public override void StickASticker(AbstractSticker sticker)
+        {
+            Console.WriteLine(this + " sticker pasted " + sticker);
+        }
+        public override string ToString()
+        {
+            return "PepsiBottle";
+        }
     }
 }

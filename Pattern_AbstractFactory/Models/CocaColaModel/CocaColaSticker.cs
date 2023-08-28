@@ -2,12 +2,11 @@
 
 namespace Pattern_AbstractFactory.Models.CocaColaModel
 {
-    class CocaColaCover : AbstractCover
+    class CocaColaSticker : AbstractSticker
     {
         public override string ToString()
         {
-            return "CocaColaCover";
+            return "CocaColaSticker";
         }
-
     }
 }

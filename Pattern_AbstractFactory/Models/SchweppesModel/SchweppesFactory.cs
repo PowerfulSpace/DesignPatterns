@@ -1,32 +1,32 @@
 ﻿using Pattern_AbstractFactory.Abstracts;
 
-namespace Pattern_AbstractFactory.Models.CocaColaModel
+namespace Pattern_AbstractFactory.Models.SchweppesModel
 {
-    class CocaColaFactory : AbstractFactory
+    class SchweppesFactory : AbstractFactory
     {
         public override AbstractBottle CreateBottle()
         {
-            return new CocaColaBottle();
+            return new SchweppesBottle();
         }
 
         public override AbstractCover CreateCover()
         {
-            return new CocaColaCover();
+            return new SchweppesCover();
         }
 
         public override AbstractSticker CreateSticker()
         {
-            return new CocaColaSticker();
+            return new SchweppesSticker();
         }
 
         public override AbstractWater CreateWater()
         {
-            return new CocaColaWater();
+            return new SchweppesWater();
         }
 
         public override string ToString()
         {
-            return "CocaColaFactory";
+            return "SchweppesFactory";
         }
     }
 }

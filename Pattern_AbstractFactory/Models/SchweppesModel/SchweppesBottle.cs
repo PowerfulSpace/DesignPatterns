@@ -1,13 +1,14 @@
 ﻿using Pattern_AbstractFactory.Abstracts;
 
-namespace Pattern_AbstractFactory.Models.CocaColaModel
+namespace Pattern_AbstractFactory.Models.SchweppesModel
 {
-    class CocaColaBottle : AbstractBottle
+    class SchweppesBottle : AbstractBottle
     {
         public override void Interact(AbstractWater water)
         {
             Console.WriteLine(this + " interact with " + water);
         }
+
         public override void ScrewTheCork(AbstractCover cover)
         {
             Console.WriteLine(this + " Cover installed " + cover);
@@ -17,10 +18,9 @@ namespace Pattern_AbstractFactory.Models.CocaColaModel
         {
             Console.WriteLine(this + " sticker pasted " + sticker);
         }
-
         public override string ToString()
         {
-            return "CocaColaBottle";
+            return "SchweppesBottle";
         }
     }
 }
