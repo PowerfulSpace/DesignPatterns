@@ -6,5 +6,9 @@
         {
             Console.WriteLine("Крыша построена");
         }
+        public override string ToString()
+        {
+            return "Крыша";
+        }
     }
 }

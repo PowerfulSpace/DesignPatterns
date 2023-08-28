@@ -6,5 +6,9 @@
         {
             Console.WriteLine("Этаж построен");
         }
+        public override string ToString()
+        {
+            return "Этаж";
+        }
     }
 }

@@ -9,4 +9,6 @@ Foreman foreman = new Foreman(builder);
 foreman.Construct();
 House result = builder.GetResult();
 
+result.Show();
+
 Console.ReadLine();

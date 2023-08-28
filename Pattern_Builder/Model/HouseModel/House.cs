@@ -13,5 +13,12 @@ namespace Pattern_Builder.Model.HouseModel
         {
             house.Add(obj);
         }
+        public void Show()
+        {
+            foreach (object obj in house)
+            {
+                Console.WriteLine(obj);
+            }
+        }
     }
 }

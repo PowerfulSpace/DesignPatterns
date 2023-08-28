@@ -6,5 +6,10 @@
         {
             Console.WriteLine("Подвал построен");
         }
+
+        public override string ToString()
+        {
+            return "Подвал";
+        }
     }
 }
