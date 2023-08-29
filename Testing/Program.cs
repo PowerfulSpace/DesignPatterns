@@ -1,31 +1,72 @@
 ﻿
 
-var a = Singleton.Instance();
-var b = Singleton.Instance();
+Provider a = new ProviderA();
+Provider b = new ProviderB();
+Provider c = new Adapter();
 
-Console.WriteLine(a == b);
-Console.WriteLine(ReferenceEquals(a,b));
+a.Request();
+b.Request();
+c.Request();
 
-Console.WriteLine(a.Equals(b));
+Console.WriteLine();
 
+Consumer consumer;
+consumer = new Consumer(a);
+consumer.Use();
+consumer = new Consumer(b);
+consumer.Use();
+consumer = new Consumer(c);
+consumer.Use();
 
 Console.ReadLine();
 
 
 
-class Singleton
+class Consumer
 {
-    static private Singleton uniqueInstance;
-    protected Singleton()
+    Provider provider;
+    public Consumer(Provider provider)
     {
+        this.provider = provider;
     }
-    static public Singleton Instance()
+    public void Use()
     {
-        if (uniqueInstance == null)
-        {
-            uniqueInstance = new Singleton();
-        }
-        return uniqueInstance;
+        provider.Request();
     }
 }
 
+abstract class Provider
+{
+    public abstract void Request();
+}
+
+class ProviderA : Provider
+{
+    public override void Request()
+    {
+        Console.WriteLine("ProviderA");
+    }
+}
+class ProviderB : Provider
+{
+    public override void Request()
+    {
+        Console.WriteLine("ProviderB");
+    }
+}
+class Adapter : Provider
+{
+    SuperProvider superProvider = new SuperProvider();
+    public override void Request()
+    {
+        superProvider.SpecificRequest();
+    }
+}
+
+class SuperProvider
+{
+    public void SpecificRequest()
+    {
+        Console.WriteLine("SuperProvider");
+    }
+}

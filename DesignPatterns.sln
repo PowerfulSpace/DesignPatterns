@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Builder", "Pattern_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_FactoryMethod", "Pattern_FactoryMethod\Pattern_FactoryMethod.csproj", "{4FF515CB-CA28-43EB-9EDA-87FD6C447510}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Prototype", "Pattern_Prototype\Pattern_Prototype.csproj", "{A4F6E178-E059-413C-A993-8D3CEDCA6F44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Prototype", "Pattern_Prototype\Pattern_Prototype.csproj", "{A4F6E178-E059-413C-A993-8D3CEDCA6F44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Singleton", "Pattern_Singleton\Pattern_Singleton.csproj", "{C744474B-5FCE-48A5-AAD1-EE8FB0C08CD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Singleton", "Pattern_Singleton\Pattern_Singleton.csproj", "{C744474B-5FCE-48A5-AAD1-EE8FB0C08CD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Structural_Adapter", "Pattern_Structural_Adapter\Pattern_Structural_Adapter.csproj", "{637B6C18-1ABD-42FE-9702-BAAD179AD465}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{C744474B-5FCE-48A5-AAD1-EE8FB0C08CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C744474B-5FCE-48A5-AAD1-EE8FB0C08CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C744474B-5FCE-48A5-AAD1-EE8FB0C08CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637B6C18-1ABD-42FE-9702-BAAD179AD465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637B6C18-1ABD-42FE-9702-BAAD179AD465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637B6C18-1ABD-42FE-9702-BAAD179AD465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637B6C18-1ABD-42FE-9702-BAAD179AD465}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
