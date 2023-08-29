@@ -1,44 +1,31 @@
 ﻿
 
-Prototype prototype = null!;
-Prototype clone = null!;
+var a = Singleton.Instance();
+var b = Singleton.Instance();
 
-prototype = new ConcretePrototype1(1);
-clone = prototype.Clone();
+Console.WriteLine(a == b);
+Console.WriteLine(ReferenceEquals(a,b));
 
-prototype = new ConcretePrototype2(2);
-clone = prototype.Clone();
+Console.WriteLine(a.Equals(b));
+
 
 Console.ReadLine();
 
 
 
-abstract class Prototype
+class Singleton
 {
-    public int Id { get; private set; }
-    public Prototype(int id)
+    static private Singleton uniqueInstance;
+    protected Singleton()
     {
-        Id = id;
     }
-    public abstract Prototype Clone();
-}
-class ConcretePrototype1 : Prototype
-{
-    public ConcretePrototype1(int id) :base(id)
-    {           
-    }
-    public override Prototype Clone()
+    static public Singleton Instance()
     {
-        return new ConcretePrototype1(Id);
+        if (uniqueInstance == null)
+        {
+            uniqueInstance = new Singleton();
+        }
+        return uniqueInstance;
     }
 }
-class ConcretePrototype2 : Prototype
-{
-    public ConcretePrototype2(int id) : base(id)
-    {
-    }
-    public override Prototype Clone()
-    {
-        return new ConcretePrototype2(Id);
-    }
-}
+
