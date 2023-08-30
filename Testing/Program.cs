@@ -1,72 +1,54 @@
 ﻿
+Abstraction abstraction;
 
-Provider a = new ProviderA();
-Provider b = new ProviderB();
-Provider c = new Adapter();
+abstraction = new RefineAbstraction(new ConcreteImplementorA());
+abstraction.Method();
 
-a.Request();
-b.Request();
-c.Request();
-
-Console.WriteLine();
-
-Consumer consumer;
-consumer = new Consumer(a);
-consumer.Use();
-consumer = new Consumer(b);
-consumer.Use();
-consumer = new Consumer(c);
-consumer.Use();
+abstraction = new RefineAbstraction(new ConcreteImplementorB());
+abstraction.Method();
 
 Console.ReadLine();
 
 
 
-class Consumer
+abstract class Abstraction
 {
-    Provider provider;
-    public Consumer(Provider provider)
+    protected Implementor implementor;
+    public Abstraction(Implementor implementor)
     {
-        this.provider = provider;
+        this.implementor = implementor;
     }
-    public void Use()
+    public virtual void Method()
     {
-        provider.Request();
+        implementor.Operation();
     }
 }
+class RefineAbstraction : Abstraction
+{
+    public RefineAbstraction(Implementor implementor) : base(implementor)
+    {
+    }
 
-abstract class Provider
-{
-    public abstract void Request();
-}
-
-class ProviderA : Provider
-{
-    public override void Request()
+    public override void Method()
     {
-        Console.WriteLine("ProviderA");
+        base.Method();
     }
 }
-class ProviderB : Provider
+abstract class Implementor
 {
-    public override void Request()
+    public abstract void Operation();
+}
+class ConcreteImplementorA : Implementor
+{
+    public override void Operation()
     {
-        Console.WriteLine("ProviderB");
+        Console.WriteLine("ConcreteImplementorA");
     }
 }
-class Adapter : Provider
+class ConcreteImplementorB : Implementor
 {
-    SuperProvider superProvider = new SuperProvider();
-    public override void Request()
+    public override void Operation()
     {
-        superProvider.SpecificRequest();
-    }
-}
-
-class SuperProvider
-{
-    public void SpecificRequest()
-    {
-        Console.WriteLine("SuperProvider");
+        Console.WriteLine("ConcreteImplementorB");
     }
 }
