@@ -1,88 +1,59 @@
 ﻿
 
+Component component = new ConcreteComponent();
 
-using System.Collections;
+Decorator decoratorA = new ConcreteDecoratorA();
+Decorator decoratorB = new ConcreteDecoratorB();
 
-Component root = new Composite("root");
-Component branch1 = new Composite("branch1");
-Component branch2 = new Composite("branch2");
-Component left1 = new Left("left1");
-Component left2 = new Left("left2");
+decoratorA.Component = component;
+decoratorB.Component = decoratorA;
+decoratorB.Operation();
 
-root.Add(branch1);
-root.Add(branch2);
-branch1.Add(left1);
-branch2.Add(left2);
-
-root.Operations();
 
 Console.ReadLine();
 
 
 abstract class Component
 {
-    protected string name;
-    public Component(string name)
-    {
-        this.name = name;
-    }
-    public abstract void Operations();
-    public abstract void Add(Component component);
-    public abstract void Remove(Component component);
-    public abstract Component GetChild(int index);
+    public abstract void Operation();
 }
-class Composite : Component
+class ConcreteComponent : Component
 {
-    ArrayList nodes = new ArrayList();
-    public Composite(string name) : base(name)
-    {    
-    }
-
-    public override void Operations()
+    public override void Operation()
     {
-        Console.WriteLine(name);
-        foreach (Component component in nodes)
-        {
-            component.Operations();
-        }
-    }
-
-    public override void Add(Component component)
-    {
-        nodes.Add(component);
-    }
-
-    public override Component GetChild(int index)
-    {
-        return nodes[index] as Component;
-    }
-    public override void Remove(Component component)
-    {
-        nodes.Remove(component);
+        Console.WriteLine("ConcreteComponent");
     }
 }
-class Left : Component
+
+abstract class Decorator : Component
 {
-    public Left(string name) : base(name)
+    public Component Component { protected get; set; }
+    public override void Operation()
     {
-    }
-
-    public override void Operations()
-    {
-        Console.WriteLine(name);
-    }
-
-    public override void Add(Component component)
-    {
-        throw new InvalidOperationException();
-    }
-
-    public override Component GetChild(int index)
-    {
-        throw new InvalidOperationException();
-    }
-    public override void Remove(Component component)
-    {
-        throw new InvalidOperationException();
+        if (Component != null)
+            Component.Operation();
     }
 }
+
+class ConcreteDecoratorA : Decorator
+{
+    public string state = "Some state";
+    public override void Operation()
+    {
+        base.Operation();
+        Console.WriteLine(state);
+    }
+}
+class ConcreteDecoratorB : Decorator
+{
+    public void AddedBehavior()
+    {
+        Console.WriteLine("Behavior");
+    }
+    public override void Operation()
+    {
+        base.Operation();
+        AddedBehavior();
+    }
+}
+
