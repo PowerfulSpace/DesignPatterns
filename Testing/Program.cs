@@ -1,54 +1,88 @@
 ﻿
-Abstraction abstraction;
 
-abstraction = new RefineAbstraction(new ConcreteImplementorA());
-abstraction.Method();
 
-abstraction = new RefineAbstraction(new ConcreteImplementorB());
-abstraction.Method();
+using System.Collections;
+
+Component root = new Composite("root");
+Component branch1 = new Composite("branch1");
+Component branch2 = new Composite("branch2");
+Component left1 = new Left("left1");
+Component left2 = new Left("left2");
+
+root.Add(branch1);
+root.Add(branch2);
+branch1.Add(left1);
+branch2.Add(left2);
+
+root.Operations();
 
 Console.ReadLine();
 
 
+abstract class Component
+{
+    protected string name;
+    public Component(string name)
+    {
+        this.name = name;
+    }
+    public abstract void Operations();
+    public abstract void Add(Component component);
+    public abstract void Remove(Component component);
+    public abstract Component GetChild(int index);
+}
+class Composite : Component
+{
+    ArrayList nodes = new ArrayList();
+    public Composite(string name) : base(name)
+    {    
+    }
 
-abstract class Abstraction
-{
-    protected Implementor implementor;
-    public Abstraction(Implementor implementor)
+    public override void Operations()
     {
-        this.implementor = implementor;
+        Console.WriteLine(name);
+        foreach (Component component in nodes)
+        {
+            component.Operations();
+        }
     }
-    public virtual void Method()
+
+    public override void Add(Component component)
     {
-        implementor.Operation();
+        nodes.Add(component);
+    }
+
+    public override Component GetChild(int index)
+    {
+        return nodes[index] as Component;
+    }
+    public override void Remove(Component component)
+    {
+        nodes.Remove(component);
     }
 }
-class RefineAbstraction : Abstraction
+class Left : Component
 {
-    public RefineAbstraction(Implementor implementor) : base(implementor)
+    public Left(string name) : base(name)
     {
     }
 
-    public override void Method()
+    public override void Operations()
     {
-        base.Method();
+        Console.WriteLine(name);
     }
-}
-abstract class Implementor
-{
-    public abstract void Operation();
-}
-class ConcreteImplementorA : Implementor
-{
-    public override void Operation()
+
+    public override void Add(Component component)
     {
-        Console.WriteLine("ConcreteImplementorA");
+        throw new InvalidOperationException();
     }
-}
-class ConcreteImplementorB : Implementor
-{
-    public override void Operation()
+
+    public override Component GetChild(int index)
     {
-        Console.WriteLine("ConcreteImplementorB");
+        throw new InvalidOperationException();
+    }
+    public override void Remove(Component component)
+    {
+        throw new InvalidOperationException();
     }
 }
