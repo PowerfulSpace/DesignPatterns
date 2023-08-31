@@ -1,59 +1,49 @@
 ﻿
+Facade facade = new Facade();
 
-Component component = new ConcreteComponent();
-
-Decorator decoratorA = new ConcreteDecoratorA();
-Decorator decoratorB = new ConcreteDecoratorB();
-
-decoratorA.Component = component;
-decoratorB.Component = decoratorA;
-decoratorB.Operation();
-
+facade.OperationAB();
+Console.WriteLine();
+facade.OperationBC();
 
 Console.ReadLine();
 
 
-abstract class Component
-{
-    public abstract void Operation();
-}
-class ConcreteComponent : Component
-{
-    public override void Operation()
-    {
-        Console.WriteLine("ConcreteComponent");
-    }
-}
 
-abstract class Decorator : Component
+class Facade
 {
-    public Component Component { protected get; set; }
-    public override void Operation()
-    {
-        if (Component != null)
-            Component.Operation();
-    }
-}
+    SubSystemA subSystemA = new SubSystemA();
+    SubSystemB subSystemB = new SubSystemB();
+    SubSystemC subSystemC = new SubSystemC();
 
-class ConcreteDecoratorA : Decorator
-{
-    public string state = "Some state";
-    public override void Operation()
+    public void OperationAB()
     {
-        base.Operation();
-        Console.WriteLine(state);
+        subSystemA.OperationA();
+        subSystemB.OperationB();
+    }
+    public void OperationBC()
+    {
+        subSystemB.OperationB();
+        subSystemC.OperationC();
     }
 }
-class ConcreteDecoratorB : Decorator
+class SubSystemA
 {
-    public void AddedBehavior()
+    public void OperationA()
     {
-        Console.WriteLine("Behavior");
-    }
-    public override void Operation()
-    {
-        base.Operation();
-        AddedBehavior();
+        Console.WriteLine("SubSystemA");
     }
 }
-
+class SubSystemB
+{
+    public void OperationB()
+    {
+        Console.WriteLine("SubSystemB");
+    }
+}
+class SubSystemC
+{
+    public void OperationC()
+    {
+        Console.WriteLine("SubSystemC");
+    }
+}
