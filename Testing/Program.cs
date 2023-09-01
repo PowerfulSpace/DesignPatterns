@@ -1,63 +1,33 @@
 ﻿
-using System.Collections;
-
-int extrinsicState = 0;
-
-Flyweight flyweight = null;
-FlyweightFactory factory = new FlyweightFactory();
-
-flyweight = factory.GetFlyweight("1");
-flyweight.Operation(extrinsicState);
-
-flyweight = factory.GetFlyweight("10");
-flyweight.Operation(extrinsicState);
-
-flyweight = new UnSharedConcreteFlyweight();
-flyweight.Operation(extrinsicState);
+IHuman @operator = new Operator();
+IHuman surogat = new Surrogate(@operator);
+surogat.Request();
 
 Console.ReadLine();
 
 
 
-abstract class Flyweight
+interface IHuman
 {
-    public abstract void Operation(int extrinsicState);
+    void Request();
 }
 
-class FlyweightFactory
+class Operator : IHuman
 {
-    Hashtable table = new Hashtable()
+    public void Request()
     {
-        {"1", new ConcreteFlyweight()},
-        {"2", new ConcreteFlyweight()},
-        {"3", new ConcreteFlyweight()}
-    };
-
-    public Flyweight GetFlyweight(string key)
-    {
-        if (!table.ContainsKey(key))
-        {
-            table.Add(key, new ConcreteFlyweight());
-        }
-
-        return table[key] as Flyweight;
+        Console.WriteLine("Hello");
     }
 }
-
-class ConcreteFlyweight : Flyweight
+class Surrogate : IHuman
 {
-    int itrinsicState;
-    public override void Operation(int extrinsicState)
+    IHuman operatot;
+    public Surrogate(IHuman operatot)
     {
-        itrinsicState = extrinsicState;
+        this.operatot = operatot;
     }
-}
-
-class UnSharedConcreteFlyweight : Flyweight
-{
-    int allState;
-    public override void Operation(int extrinsicState)
+    public void Request()
     {
-        allState = extrinsicState;
+        this.operatot.Request();
     }
 }
