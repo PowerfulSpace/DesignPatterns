@@ -1,49 +1,63 @@
 ﻿
-Facade facade = new Facade();
+using System.Collections;
 
-facade.OperationAB();
-Console.WriteLine();
-facade.OperationBC();
+int extrinsicState = 0;
+
+Flyweight flyweight = null;
+FlyweightFactory factory = new FlyweightFactory();
+
+flyweight = factory.GetFlyweight("1");
+flyweight.Operation(extrinsicState);
+
+flyweight = factory.GetFlyweight("10");
+flyweight.Operation(extrinsicState);
+
+flyweight = new UnSharedConcreteFlyweight();
+flyweight.Operation(extrinsicState);
 
 Console.ReadLine();
 
 
 
-class Facade
+abstract class Flyweight
 {
-    SubSystemA subSystemA = new SubSystemA();
-    SubSystemB subSystemB = new SubSystemB();
-    SubSystemC subSystemC = new SubSystemC();
+    public abstract void Operation(int extrinsicState);
+}
 
-    public void OperationAB()
+class FlyweightFactory
+{
+    Hashtable table = new Hashtable()
     {
-        subSystemA.OperationA();
-        subSystemB.OperationB();
-    }
-    public void OperationBC()
+        {"1", new ConcreteFlyweight()},
+        {"2", new ConcreteFlyweight()},
+        {"3", new ConcreteFlyweight()}
+    };
+
+    public Flyweight GetFlyweight(string key)
     {
-        subSystemB.OperationB();
-        subSystemC.OperationC();
+        if (!table.ContainsKey(key))
+        {
+            table.Add(key, new ConcreteFlyweight());
+        }
+
+        return table[key] as Flyweight;
     }
 }
-class SubSystemA
+
+class ConcreteFlyweight : Flyweight
 {
-    public void OperationA()
+    int itrinsicState;
+    public override void Operation(int extrinsicState)
     {
-        Console.WriteLine("SubSystemA");
+        itrinsicState = extrinsicState;
     }
 }
-class SubSystemB
+
+class UnSharedConcreteFlyweight : Flyweight
 {
-    public void OperationB()
+    int allState;
+    public override void Operation(int extrinsicState)
     {
-        Console.WriteLine("SubSystemB");
-    }
-}
-class SubSystemC
-{
-    public void OperationC()
-    {
-        Console.WriteLine("SubSystemC");
+        allState = extrinsicState;
     }
 }
