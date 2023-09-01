@@ -1,33 +1,48 @@
 ﻿
-IHuman @operator = new Operator();
-IHuman surogat = new Surrogate(@operator);
-surogat.Request();
+Handler a = new ConcreteHandler1();
+Handler b = new ConcreteHandler2();
+
+a.Successor = b;
+a.HandleRequest(1);
+a.HandleRequest(2);
+a.HandleRequest(3);
+a.HandleRequest(4);
+a.HandleRequest(5);
 
 Console.ReadLine();
 
 
-
-interface IHuman
+abstract class Handler
 {
-    void Request();
+    public Handler Successor { get; set; }
+    public abstract void HandleRequest(int request);
 }
 
-class Operator : IHuman
+class ConcreteHandler1 : Handler
 {
-    public void Request()
+    public override void HandleRequest(int request)
     {
-        Console.WriteLine("Hello");
+        if (request == 1)
+        {
+            Console.WriteLine("ConcreteHandler1");
+        }
+        else if(Successor != null)
+        {
+            this.Successor.HandleRequest(request);
+        }
     }
 }
-class Surrogate : IHuman
+class ConcreteHandler2 : Handler
 {
-    IHuman operatot;
-    public Surrogate(IHuman operatot)
+    public override void HandleRequest(int request)
     {
-        this.operatot = operatot;
-    }
-    public void Request()
-    {
-        this.operatot.Request();
+        if (request ==2 )
+        {
+            Console.WriteLine("ConcreteHandler2");
+        }
+        else if (Successor != null)
+        {
+            this.Successor.HandleRequest(request);
+        }
     }
 }
