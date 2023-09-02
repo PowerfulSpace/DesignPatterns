@@ -1,52 +1,57 @@
 ﻿
-Receiver receiver = new Receiver();
-Command command = new ConcreteCommand(receiver);
-Invoke invoke = new Invoke();
+Context context = new Context
+{
+    Vocabulary = 'a',
+    Source = "aaa"
+};
 
-invoke.StoreCommand(command);
-invoke.ExecuteCommand();
+NonTerminalExpression expression = new NonTerminalExpression();
+expression.Interpret(context);
+
+Console.WriteLine(context.Result);
+
 
 Console.ReadLine();
 
 
-class Receiver
+class Context
 {
-    public void Action()
-    {
-        Console.WriteLine("Action");
-    }
+    public bool Result { get; set; }
+    public string Source { get; set; }
+    public char Vocabulary { get; set; }
+    public int Position { get; set; }
 }
 
-abstract class Command
+abstract class AbstractExpression
 {
-    protected Receiver receiver;
-    public Command(Receiver receiver)
-    {
-        this.receiver = receiver;
-    }
-    public abstract void Execute();
+    public abstract void Interpret(Context context);
 }
 
-class ConcreteCommand : Command
+class TerminalExpression : AbstractExpression
 {
-    public ConcreteCommand(Receiver receiver) : base(receiver) 
+    public override void Interpret(Context context)
     {
-    }
-    public override void Execute()
-    {
-        receiver.Action();
+        context.Result = context.Source[context.Position] == context.Vocabulary;
     }
 }
-
-class Invoke
+class NonTerminalExpression : AbstractExpression
 {
-    public Command command;
-    public void ExecuteCommand()
+    AbstractExpression nonTerminalExpression;
+    AbstractExpression terminalExpression;
+
+    public override void Interpret(Context context)
     {
-        command.Execute();
-    }
-    public void StoreCommand(Command command)
-    {
-        this.command = command;
+        if (context.Position < context.Source.Length)
+        {
+            terminalExpression = new TerminalExpression();
+            terminalExpression.Interpret(context);
+            context.Position++;
+
+            if (context.Result)
+            {
+                nonTerminalExpression = new NonTerminalExpression();
+                nonTerminalExpression.Interpret(context);
+            }
+        }
     }
 }
