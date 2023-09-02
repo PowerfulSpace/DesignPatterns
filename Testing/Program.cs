@@ -1,77 +1,39 @@
 ﻿
 
-ConcreteMediatr mediatr = new ConcreteMediatr();
+Man man = new Man();
+Robot robot = new Robot();
 
-Farmer farmer = new Farmer(mediatr);
-Cannery cannery = new Cannery(mediatr);
-Shop shop = new Shop(mediatr);
+man.Clothes = "Джинсы, футболка, кеды";
+robot.Backpack = man.UnDress();
 
+man.Clothes = "шорты";
 
-mediatr.Farmer = farmer;
-mediatr.Cannery = cannery;
-mediatr.Shop = shop;
-
-farmer.GrowTomato();
+man.Dress(robot.Backpack);
 
 Console.ReadLine();
 
 
-abstract class Mediator
+class Man
 {
-    public abstract void Send(string message, Colleague colleague);
-}
-class ConcreteMediatr : Mediator
-{
-    public Farmer Farmer { get; set; }
-    public Cannery Cannery { get; set; }
-    public Shop Shop { get; set; }
-    public override void Send(string message, Colleague colleague)
+    public string Clothes { get; set; }
+    public void Dress(Backpack backpack)
     {
-        if (colleague == Farmer)
-        {
-            Cannery.MakeKetchup(message);
-        }
-        else if (colleague == Cannery)
-        {
-            Shop.SellKetchup(message);
-        }
+        Clothes = backpack.Contents;
+    }
+    public Backpack UnDress()
+    {
+        return new Backpack(Clothes);
     }
 }
-
-abstract class Colleague
+class Backpack
 {
-    protected Mediator mediatr;
-    public Colleague(Mediator mediatr)
+    public string Contents { get; private set; }
+    public Backpack(string state)
     {
-        this.mediatr = mediatr;
+        Contents = state;
     }
 }
-class Farmer : Colleague
+class Robot
 {
-    public Farmer(Mediator mediatr) : base(mediatr) { }
-    public void GrowTomato()
-    {
-        string tomato = "Tomato";
-        Console.WriteLine(this.GetType().Name + " raised " + tomato);
-        mediatr.Send(tomato, this);
-    }
-
-}
-class Cannery : Colleague
-{
-    public Cannery(Mediator mediatr) : base(mediatr) { }
-    public void MakeKetchup(string message)
-    {
-        string ketchup = message + " ketchup";
-        Console.WriteLine(this.GetType().Name + " raised " + ketchup);
-        mediatr.Send(ketchup, this);
-    }
-}
-class Shop : Colleague
-{
-    public Shop(Mediator mediatr) : base(mediatr) { }
-    public void SellKetchup(string message)
-    {
-        Console.WriteLine(this.GetType().Name + " sold " + message);
-    }
+    public Backpack Backpack { get; set; }
 }
