@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing2", "Testing2\Testin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Structural_Proxy", "Pattern_Structural_Proxy\Pattern_Structural_Proxy.csproj", "{F73AE7A1-F266-49AE-8AF4-AB18117968FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Behavior_ChainOfResponsibility", "Pattern_Behavior_ChainOfResponsibility\Pattern_Behavior_ChainOfResponsibility.csproj", "{42D03A30-D581-48C4-BBF2-2CDD617B4A92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Behavior_ChainOfResponsibility", "Pattern_Behavior_ChainOfResponsibility\Pattern_Behavior_ChainOfResponsibility.csproj", "{42D03A30-D581-48C4-BBF2-2CDD617B4A92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Behavior_Command", "Pattern_Behavior_Command\Pattern_Behavior_Command.csproj", "{8F218757-E4F0-431D-A009-E5CEFD569E12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{42D03A30-D581-48C4-BBF2-2CDD617B4A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D03A30-D581-48C4-BBF2-2CDD617B4A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D03A30-D581-48C4-BBF2-2CDD617B4A92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F218757-E4F0-431D-A009-E5CEFD569E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F218757-E4F0-431D-A009-E5CEFD569E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F218757-E4F0-431D-A009-E5CEFD569E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F218757-E4F0-431D-A009-E5CEFD569E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

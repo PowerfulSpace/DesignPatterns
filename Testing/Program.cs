@@ -1,48 +1,52 @@
 ﻿
-Handler a = new ConcreteHandler1();
-Handler b = new ConcreteHandler2();
+Receiver receiver = new Receiver();
+Command command = new ConcreteCommand(receiver);
+Invoke invoke = new Invoke();
 
-a.Successor = b;
-a.HandleRequest(1);
-a.HandleRequest(2);
-a.HandleRequest(3);
-a.HandleRequest(4);
-a.HandleRequest(5);
+invoke.StoreCommand(command);
+invoke.ExecuteCommand();
 
 Console.ReadLine();
 
 
-abstract class Handler
+class Receiver
 {
-    public Handler Successor { get; set; }
-    public abstract void HandleRequest(int request);
-}
-
-class ConcreteHandler1 : Handler
-{
-    public override void HandleRequest(int request)
+    public void Action()
     {
-        if (request == 1)
-        {
-            Console.WriteLine("ConcreteHandler1");
-        }
-        else if(Successor != null)
-        {
-            this.Successor.HandleRequest(request);
-        }
+        Console.WriteLine("Action");
     }
 }
-class ConcreteHandler2 : Handler
+
+abstract class Command
 {
-    public override void HandleRequest(int request)
+    protected Receiver receiver;
+    public Command(Receiver receiver)
     {
-        if (request ==2 )
-        {
-            Console.WriteLine("ConcreteHandler2");
-        }
-        else if (Successor != null)
-        {
-            this.Successor.HandleRequest(request);
-        }
+        this.receiver = receiver;
+    }
+    public abstract void Execute();
+}
+
+class ConcreteCommand : Command
+{
+    public ConcreteCommand(Receiver receiver) : base(receiver) 
+    {
+    }
+    public override void Execute()
+    {
+        receiver.Action();
+    }
+}
+
+class Invoke
+{
+    public Command command;
+    public void ExecuteCommand()
+    {
+        command.Execute();
+    }
+    public void StoreCommand(Command command)
+    {
+        this.command = command;
     }
 }
