@@ -1,39 +1,75 @@
 ﻿
+using System.Collections;
 
-Man man = new Man();
-Robot robot = new Robot();
+ConcreteSubject subject = new ConcreteSubject();
+subject.State = "Some State";
 
-man.Clothes = "Джинсы, футболка, кеды";
-robot.Backpack = man.UnDress();
+ConcreteObserver concreteObserver1 = new ConcreteObserver(subject);
+ConcreteObserver concreteObserver2 = new ConcreteObserver(subject);
 
-man.Clothes = "шорты";
+subject.Attach(concreteObserver1);
+subject.Attach(concreteObserver2);
 
-man.Dress(robot.Backpack);
+subject.Notify();
+
+Console.WriteLine(concreteObserver1);
+Console.WriteLine(concreteObserver2);
+
+subject.State = "Other State";
+subject.Notify();
+
+Console.WriteLine(concreteObserver1);
+Console.WriteLine(concreteObserver2);
 
 Console.ReadLine();
 
 
-class Man
+
+abstract class Subject
 {
-    public string Clothes { get; set; }
-    public void Dress(Backpack backpack)
+    ArrayList observers = new ArrayList();
+    public abstract string State { get; set; }
+    public void Attach(Observer observer)
     {
-        Clothes = backpack.Contents;
+        observers.Add(observer);
     }
-    public Backpack UnDress()
+    public void Detach(Observer observer)
     {
-        return new Backpack(Clothes);
+        observers.Remove(observer);
+    }
+    public void Notify()
+    {
+        foreach (Observer observer in observers)
+        {
+            observer.Update(State);
+        }
     }
 }
-class Backpack
+class ConcreteSubject : Subject
 {
-    public string Contents { get; private set; }
-    public Backpack(string state)
-    {
-        Contents = state;
-    }
+    public override string State { get; set; }
 }
-class Robot
+
+abstract class Observer
 {
-    public Backpack Backpack { get; set; }
+    public abstract void Update(string state);
+}
+class ConcreteObserver : Observer
+{
+    ConcreteSubject subject;
+    string observerstate;
+    public ConcreteObserver(ConcreteSubject subject)
+    {
+        this.subject = subject;
+    }
+
+    public override void Update(string state)
+    {
+        observerstate = state;
+    }
+
+    public override string ToString()
+    {
+        return $"подписка: " + observerstate;
+    }
 }
