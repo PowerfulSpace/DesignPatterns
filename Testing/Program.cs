@@ -1,75 +1,47 @@
 ﻿
-using System.Collections;
 
-ConcreteSubject subject = new ConcreteSubject();
-subject.State = "Some State";
-
-ConcreteObserver concreteObserver1 = new ConcreteObserver(subject);
-ConcreteObserver concreteObserver2 = new ConcreteObserver(subject);
-
-subject.Attach(concreteObserver1);
-subject.Attach(concreteObserver2);
-
-subject.Notify();
-
-Console.WriteLine(concreteObserver1);
-Console.WriteLine(concreteObserver2);
-
-subject.State = "Other State";
-subject.Notify();
-
-Console.WriteLine(concreteObserver1);
-Console.WriteLine(concreteObserver2);
+Context context = new Context(new ConcreteStateA());
+context.Request();
+Console.WriteLine(context.State);
+context.Request();
+Console.WriteLine(context.State);
+context.Request();
+Console.WriteLine(context.State);
+context.Request();
+Console.WriteLine(context.State);
 
 Console.ReadLine();
 
 
-
-abstract class Subject
+class Context
 {
-    ArrayList observers = new ArrayList();
-    public abstract string State { get; set; }
-    public void Attach(Observer observer)
+    public State State { get; set; }
+
+    public Context(State state)
     {
-        observers.Add(observer);
+        State = state;
     }
-    public void Detach(Observer observer)
+    public void Request()
     {
-        observers.Remove(observer);
-    }
-    public void Notify()
-    {
-        foreach (Observer observer in observers)
-        {
-            observer.Update(State);
-        }
+        State.Handle(this);
     }
 }
-class ConcreteSubject : Subject
+
+abstract class State
 {
-    public override string State { get; set; }
+    public abstract void Handle(Context context);
 }
-
-abstract class Observer
+class ConcreteStateA : State
 {
-    public abstract void Update(string state);
+    public override void Handle(Context context)
+    {
+        context.State = new ConcreteStateB();
+    }
 }
-class ConcreteObserver : Observer
+class ConcreteStateB : State
 {
-    ConcreteSubject subject;
-    string observerstate;
-    public ConcreteObserver(ConcreteSubject subject)
+    public override void Handle(Context context)
     {
-        this.subject = subject;
-    }
-
-    public override void Update(string state)
-    {
-        observerstate = state;
-    }
-
-    public override string ToString()
-    {
-        return $"подписка: " + observerstate;
+        context.State = new ConcreteStateA();
     }
 }
