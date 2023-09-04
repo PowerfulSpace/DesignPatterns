@@ -45,9 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Behavior_Memento", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Behavior_Observer", "Pattern_Behavior_Observer\Pattern_Behavior_Observer.csproj", "{83C95376-2A94-4EDE-9754-1FA62E20205E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Behavior_State", "Pattern_Behavior_State\Pattern_Behavior_State.csproj", "{F53096BD-5687-4ABE-83DE-936B27A8335E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Behavior_State", "Pattern_Behavior_State\Pattern_Behavior_State.csproj", "{F53096BD-5687-4ABE-83DE-936B27A8335E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Behavior_Strategy", "Pattern_Behavior_Strategy\Pattern_Behavior_Strategy.csproj", "{D3B5D502-A726-41F7-B5EE-C27A163AFE5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pattern_Behavior_Strategy", "Pattern_Behavior_Strategy\Pattern_Behavior_Strategy.csproj", "{D3B5D502-A726-41F7-B5EE-C27A163AFE5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern_Behavior_TemplateMethod", "Pattern_Behavior_TemplateMethod\Pattern_Behavior_TemplateMethod.csproj", "{D644D84D-E3E8-4ED9-9C9F-6049291EF273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +145,10 @@ Global
 		{D3B5D502-A726-41F7-B5EE-C27A163AFE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3B5D502-A726-41F7-B5EE-C27A163AFE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3B5D502-A726-41F7-B5EE-C27A163AFE5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D644D84D-E3E8-4ED9-9C9F-6049291EF273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D644D84D-E3E8-4ED9-9C9F-6049291EF273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D644D84D-E3E8-4ED9-9C9F-6049291EF273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D644D84D-E3E8-4ED9-9C9F-6049291EF273}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
