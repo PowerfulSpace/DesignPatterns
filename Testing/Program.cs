@@ -1,55 +1,95 @@
 ﻿
+using System.Collections;
 
-TwoColorFlag flag = new UkraineFlag();
-flag.Draw();
+Village village = new Village();
+village.Add(new BoysHouse());
+village.Add(new GirlHouse());
 
-Console.WriteLine();
-
-flag = new PolangFlag();
-flag.Draw();
-
+village.Accept(new Santa());
 
 Console.ReadLine();
 
 
 
-abstract class TwoColorFlag
+class Village
 {
-    public void Draw()
-    {
-        DrawTopPart();
-        DrawBottomPart();
-    }
-    protected abstract void DrawTopPart();
-    protected abstract void DrawBottomPart();
-}
+    ArrayList elements = new ArrayList();
 
-class UkraineFlag : TwoColorFlag
-{
-    protected override void DrawBottomPart()
+    public void Add(Element unit)
     {
-        Console.BackgroundColor = ConsoleColor.Blue;
-        Console.WriteLine(new string(' ',7));
+        elements.Add(unit);
     }
-
-    protected override void DrawTopPart()
+    public void Remove(Element unit)
     {
-        Console.BackgroundColor = ConsoleColor.Yellow;
-        Console.WriteLine(new string(' ', 7));
+        elements.Remove(unit);
+    }
+    public void Accept(Visitor visitor)
+    {
+        foreach (Element unit in elements)
+        {
+            unit.Invite(visitor);
+        }
     }
 }
 
-class PolangFlag : TwoColorFlag
+abstract class Visitor
 {
-    protected override void DrawBottomPart()
+    public abstract void VisitBoysHouse(BoysHouse boysHouse);
+    public abstract void VisitGirlHouse(GirlHouse girlHouse);
+}
+class Santa : Visitor
+{
+    public override void VisitBoysHouse(BoysHouse boysHouse)
     {
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.WriteLine(new string(' ', 7));
+        boysHouse.TellFairyTale();
     }
 
-    protected override void DrawTopPart()
+    public override void VisitGirlHouse(GirlHouse girlHouse)
     {
-        Console.BackgroundColor = ConsoleColor.Red;
-        Console.WriteLine(new string(' ', 7));
+        girlHouse.GiveDress();
+    }
+}
+class Troll : Visitor
+{
+    public override void VisitBoysHouse(BoysHouse boysHouse)
+    {
+        Console.WriteLine("Украсть подарок у мальчика");
+    }
+
+    public override void VisitGirlHouse(GirlHouse girlHouse)
+    {
+        Console.WriteLine("Украсть подарок у девочки");
+    }
+}
+abstract class Element
+{
+    public abstract void Invite(Visitor visitor);
+}
+class BoysHouse : Element
+{
+    public override void Invite(Visitor visitor)
+    {
+        if (visitor is Santa)
+        {
+            visitor.VisitBoysHouse(this);
+        }
+    }
+    public void TellFairyTale()
+    {
+        Console.WriteLine("Рассказать сказку");
+    }
+}
+class GirlHouse : Element
+{
+    public override void Invite(Visitor visitor)
+    {
+        if (visitor is Santa)
+        {
+            visitor.VisitGirlHouse(this);
+        }
+    }
+    public void GiveDress()
+    {
+        Console.WriteLine("Подарить платье");
     }
 }
